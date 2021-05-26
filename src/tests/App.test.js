@@ -38,4 +38,12 @@ describe('Testing the <App /> component', () => {
     userEvent.click(favoritePokemons);
     expect(history.location.pathname).toBe('/favorites');
   });
+
+  it('the <NotFound /> component is showed when an invalid URL is typed', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    history.push('/not-found');
+
+    expect(history.location.pathname).toBe('/not-found');
+    expect(getByText('Page requested not found')).toBeInTheDocument();
+  });
 });
